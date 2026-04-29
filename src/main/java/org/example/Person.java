@@ -1,5 +1,6 @@
 package org.example;
 
+// super class
 public class Person {
     private String name;
     private int id;
@@ -14,6 +15,7 @@ public class Person {
     public int getId(){return id;}
     public String getPassword(){return password;}
     // Sets methods
+
     public void setName(String name){this.name = name;}
     public void setId(int id){this.id = id;}
     public void getPassword(String PhoneNumber){this.password = password;}
