@@ -10,6 +10,9 @@ public class Main {
                 statusPaitent.STABLE,
                 "Headache"
         );
+        IO.println(pat1.getPassword());
+        IO.println(pat1.toString());
+        pat1.setPassword("100");
         IO.println(pat1.toString());
     }
 }

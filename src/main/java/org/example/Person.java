@@ -10,13 +10,28 @@ public class Person {
         this.name = name;
         this.id = id;
     }
-    // Gets methods
-    public String getName(){return name;}
-    public int getId(){return id;}
-    public String getPassword(){return password;}
-    // Sets methods
+//getters
+    public String getName() {
+        return name;
+    }
 
-    public void setName(String name){this.name = name;}
-    public void setId(int id){this.id = id;}
-    public void getPassword(String PhoneNumber){this.password = password;}
+    public int getId() {
+        return id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+    //setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

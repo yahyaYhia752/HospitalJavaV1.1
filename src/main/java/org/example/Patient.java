@@ -13,7 +13,30 @@ public class Patient extends Person{
         this.statsPatient = statusPaitent.STABLE;
 
     }
+    // setters
+    public void setIdPatient(int idPatient) {
+        this.idPatient = idPatient;
+    }
 
+    public void setDiagnosla(String diagnosla) {
+        this.diagnosla = diagnosla;
+    }
+
+    public void setStatsPatient(statusPaitent statsPatient) {
+        this.statsPatient = statsPatient;
+    }
+    // getters
+    public int getIdPatient() {
+        return idPatient;
+    }
+
+    public String getDiagnosla() {
+        return diagnosla;
+    }
+
+    public statusPaitent getStatsPatient() {
+        return statsPatient;
+    }
     @Override
     public String toString() {
         return "Patient{" +
