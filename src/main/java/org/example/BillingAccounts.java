@@ -66,6 +66,27 @@ public class BillingAccounts {
         return totalAmount - amountPaid;
     }
     // toString
+
+    public static BillingAccounts StringToBillingAccounts(String line) {
+
+        String properties = line.substring(line.indexOf("{") + 1, line.indexOf("}"));
+
+        String[] parts = properties.split(", ");
+        private int accountId;
+        private Patient patient;
+        private double totalAmount;
+        private double amountPaid;
+
+        int id = Integer.parseInt(parts[1].split("=")[1]);
+        String accountId = parts[0].split("=")[1].replace("'", "");
+        String password = parts[2].split("=")[1].replace("'", "");
+        int idPatient = Integer.parseInt(parts[3].split("=")[1]);
+        String diagnosla = parts[4].split("=")[1].replace("'", "");
+        String statsStr = parts[5].split("=")[1].trim();
+
+        return new Patient(name, id, password, idPatient, StatusPaitent.valueOf(statsStr),diagnosla,);
+    }
+
     @Override
     public String toString() {
         return "BillingAccounts{" +

@@ -65,7 +65,34 @@ public class Appointment {
         this.doctor = null;
         this.patient = null;
     }
-    // اللي فالمشروع خلصت ذا انا لحد يلمسه
-    // زبطوالثلاث كلاسات حق الحسابات
+    public static Appointment StringToAppointmet(String line) {
+        String properties = line.substring(line.indexOf("{") + 1, line.indexOf("}"));
 
+        String[] parts = properties.split(", ");
+
+        // setup properties one by one
+        int idApp = Integer.parseInt(parts[0].split("=")[1]);
+        String date = parts[1].split("=")[1].replace("'", "");
+        String docName = parts[2].split("=")[1].replace("'", "");
+        String paitName = parts[3].split("=")[1].replace("'", "");
+        try {
+            String dataDoc = DataManage.findAccount(docName);
+            String dataPait = DataManage.findAccount(paitName);
+            Doctor doctor = Doctor.StringToDoctor(dataDoc);
+            Patient patient = Patient.StringToPatient(dataPait);
+            return new Appointment(idApp, date,doctor, patient);
+        }
+        catch (Exception e){
+            IO.println("Some Errors While find Appointment: "+e.getMessage());
+        }
+    }
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "idAppointment=" + idAppointment +
+                ", date='" + date + '\'' +
+                ", doctor=" + doctor.getName() +
+                ", patient=" + patient.getName() +
+                '}';
+    }
 }

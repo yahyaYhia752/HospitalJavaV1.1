@@ -4,4 +4,5 @@ public enum StatusPaitent {
     STABLE,
     CRITICAL,
     DISCHARGED,
+
 }

@@ -4,16 +4,16 @@ public class Patient extends Person{
     private int idPatient;
     private String diagnosla;
     private static int count;
-
+    private BillingAccounts payAcc;
 
     private StatusPaitent statsPatient;
-    public Patient(String name, int id, String password, int idpat, StatusPaitent patStatus, String digansla) {
+    public Patient(String name, int id, String password, int idpat, StatusPaitent patStatus, String digansla,BillingAccounts payAcc) {
         count += 1;
         super(name, id, password);
         this.idPatient = idpat;
         this.diagnosla = digansla;
         this.statsPatient = StatusPaitent.STABLE;
-
+        payAcc = new BillingAccounts(id,this,0,0);
     }
     // setters
     public void setIdPatient(int idPatient) {
@@ -59,7 +59,7 @@ public class Patient extends Person{
         String diagnosla = parts[4].split("=")[1].replace("'", "");
         String statsStr = parts[5].split("=")[1].trim();
 
-        return new Patient(name, id, password, idPatient, StatusPaitent.valueOf(statsStr),diagnosla);
+        return new Patient(name, id, password, idPatient, StatusPaitent.valueOf(statsStr),diagnosla,);
     }
     @Override
     public String toString() {
