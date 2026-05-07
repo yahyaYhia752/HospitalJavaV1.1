@@ -1,5 +1,5 @@
 package org.example;
-import java.time.LocalDate;
+
 
 public class Doctor extends Person{
     // كلموه تكفى ..
@@ -40,19 +40,23 @@ public class Doctor extends Person{
     public void setSalary(double salary) {
         this.salary = salary;
     }
-    public void assingPatient(Patient p){
+    public void assingPatient(Patient p,String date){
         Appointment ap = new Appointment(
                 Appointment.getCount(),
-                LocalDate.now().toString(),
+                date,
                 Doctor.this,
                 p);
     }
     @Override
     public String toString() {
+        String personStr = super.toString();
+        String allPp = personStr.substring(personStr.indexOf("{") + 1, personStr.indexOf("}"));
         return "Doctor{" +
-                "docId=" + docId +
+                allPp+
+                ", docId=" + docId +
                 ", field='" + field + '\'' +
                 ", salary=" + salary +
                 '}';
     }
+
 }

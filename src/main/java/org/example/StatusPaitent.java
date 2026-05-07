@@ -1,6 +1,6 @@
 package org.example;
 
-public enum statusPaitent {
+public enum StatusPaitent {
     STABLE,
     CRITICAL,
     DISCHARGED,

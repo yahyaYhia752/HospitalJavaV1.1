@@ -6,13 +6,13 @@ public class Patient extends Person{
     private static int count;
 
 
-    private statusPaitent statsPatient;
-    public Patient(String name, int id, String password,int idpat,statusPaitent patStatus,String digansla) {
+    private StatusPaitent statsPatient;
+    public Patient(String name, int id, String password, int idpat, StatusPaitent patStatus, String digansla) {
         count += 1;
         super(name, id, password);
         this.idPatient = idpat;
         this.diagnosla = digansla;
-        this.statsPatient = statusPaitent.STABLE;
+        this.statsPatient = StatusPaitent.STABLE;
 
     }
     // setters
@@ -24,7 +24,7 @@ public class Patient extends Person{
         this.diagnosla = diagnosla;
     }
 
-    public void setStatsPatient(statusPaitent statsPatient) {
+    public void setStatsPatient(StatusPaitent statsPatient) {
         this.statsPatient = statsPatient;
     }
     // getters
@@ -36,7 +36,7 @@ public class Patient extends Person{
         return diagnosla;
     }
 
-    public statusPaitent getStatsPatient() {
+    public StatusPaitent getStatsPatient() {
         return statsPatient;
     }
 
@@ -44,10 +44,30 @@ public class Patient extends Person{
         return count;
     }
 
+    //  Patient{name='yahya', id=10, password='123456789', idPatient=10, diagnosla='خاطره مكسور لول', statsPatient=STABLE}
+    public static Patient StringToPatient(String line) {
+
+        String properties = line.substring(line.indexOf("{") + 1, line.indexOf("}"));
+
+        String[] parts = properties.split(", ");
+
+        // setup properties one by one
+        String name = parts[0].split("=")[1].replace("'", "");
+        int id = Integer.parseInt(parts[1].split("=")[1]);
+        String password = parts[2].split("=")[1].replace("'", "");
+        int idPatient = Integer.parseInt(parts[3].split("=")[1]);
+        String diagnosla = parts[4].split("=")[1].replace("'", "");
+        String statsStr = parts[5].split("=")[1].trim();
+
+        return new Patient(name, id, password, idPatient, StatusPaitent.valueOf(statsStr),diagnosla);
+    }
     @Override
     public String toString() {
+        String personStr = super.toString();
+        String allPp = personStr.substring(personStr.indexOf("{") + 1, personStr.indexOf("}"));
         return "Patient{" +
-                "idPatient=" + idPatient +
+                allPp+
+                ", idPatient=" + idPatient +
                 ", diagnosla='" + diagnosla + '\'' +
                 ", statsPatient=" + statsPatient +
                 '}';

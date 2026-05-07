@@ -43,4 +43,20 @@ public class Person {
                 ", password='" + password + '\'' +
                 '}';
     }
+
+
+    //    Person{name='yahya', id=99, password='123456789'}
+    public static Person StringToPerson(String line) {
+        // getting all Properties
+        String properties = line.substring(line.indexOf("{") + 1, line.indexOf("}"));
+        // getting properties as 1D Array
+        String[] parts = properties.split(", ");
+
+        // setup properties one by one
+        String name = parts[0].split("=")[1].replace("'", "");
+        String strId = parts[1].split("=")[1];
+        int id = Integer.parseInt(strId);
+        String password = parts[2].split("=")[1].replace("'", "");
+        return new Person(name, id, password);
+    }
 }
