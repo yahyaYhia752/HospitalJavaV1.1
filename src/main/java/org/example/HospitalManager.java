@@ -144,8 +144,7 @@ public class HospitalManager {
                     "2. Search for a Patient\n" +
                     "3. View My Appointments\n" +
                     "4. Add Appointment\n" +
-                    "5. Finishing Paitent\n" +
-                    "6. Exit");
+                    "5. Exit");
             choice = kbd.nextInt();
             kbd.nextLine();
             switch (choice) {
@@ -153,8 +152,7 @@ public class HospitalManager {
                 case 2: searchPatient(); break;
                 case 3: viewDoctorAppointments(doc); break;
                 case 4: addNewAppointment(doc); break;
-                case 5: treatPatient(doc); break;
-                case 6: IO.println("have a good day, Dr. " + doc.getName()); break;
+                case 5: IO.println("have a good day, Dr. " + doc.getName()); break;
                 default: IO.println("there is no choice with this number");
             }
         } while (choice != 5);
@@ -166,18 +164,17 @@ public class HospitalManager {
             IO.println("");
             IO.println("=== Patient Menu ===\n" +
                     "1. View My Appointments\n" +
-                    "2. Book Appointment with Doctor\n" +
-                    "3. Search for a Doctor\n" +
-                    "4. View My Bill\n" +
-                    "5. Exit");
+                    "2. Search for a Doctor\n" +
+                    "3. View My Bill\n" +
+                    "4. Exit");
             choice = kbd.nextInt();
             kbd.nextLine();
             switch (choice) {
                 case 1: viewPatientAppointments(pat); break;
-                case 2: bookAppointment(pat); break;
-                case 3: searchDoctor(); break;
-                case 4: viewBill(pat); break;
-                case 5: IO.println("Goodbye " + pat.getName()); break;
+//                case 2: bookAppointment(pat); break;
+                case 2: searchDoctor(); break;
+                case 3: viewBill(pat); break;
+                case 4: IO.println("Goodbye " + pat.getName()); break;
                 default: IO.println("there is no choice with this number");
             }
         } while (choice != 5);
@@ -272,36 +269,6 @@ public class HospitalManager {
             finalArray[i] = found[i];
         }
         return finalArray;
-    }
-    private void bookAppointment(Patient pat) throws Exception {
-        searchDoctor();
-        IO.println("Enter doctor number or name:");
-        String input = kbd.nextLine();
-        Doctor doc = null;
-
-        try {
-            int num = Integer.parseInt(input);
-            if (num >= 1 && num <= doctorCount) {
-                doc = doctors[num - 1];
-            }
-        } catch (NumberFormatException e) {
-            // لو كتب اسم
-            for (int i = 0; i < doctorCount; i++) {
-                if (doctors[i].getName().equalsIgnoreCase(input)) {
-                    doc = doctors[i];
-                    break;
-                }
-            }
-        }
-
-        if (doc == null) { IO.println("Doctor not found."); return; }
-        IO.println("Enter appointment date (e.g. 2025-01-15):");
-        String date = getValidDate();
-        Appointment ap = new Appointment(Appointment.getCount(), date, doc, pat);
-        appointments[appointmentCount++] = ap;
-        DataManage.setDataReaded(DataManage.getFile() + ap.toString() + "\n");
-        DataManage.setFile();
-        IO.println("appointment booked with Dr." + doc.getName());
     }
 
     private void searchDoctor() {

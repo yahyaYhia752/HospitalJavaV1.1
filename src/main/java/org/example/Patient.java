@@ -7,8 +7,8 @@ public class Patient extends Person{
 
     private StatusPaitent statsPatient;
     public Patient(String name, int id, String password, int idpat, StatusPaitent patStatus, String digansla) {
-        count += 1;
         super(name, id, password);
+        count += 1;
         this.idPatient = idpat;
         this.diagnosla = digansla;
         this.statsPatient = StatusPaitent.STABLE;
