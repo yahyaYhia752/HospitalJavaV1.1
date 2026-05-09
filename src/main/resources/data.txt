@@ -1,2 +1,1 @@
-Doctor{name='DcAhmed', id=1009, password='0987654321', docId=1002, field='talking so much', salary=10400.0}
-Doctor{name='xxxwww', id=1019, password='0954321', docId=12, field='tidkfr', salary=1040.0}
+Patient{name='yahya', id=0, password='101010', idPatient=0, diagnosla='i have headahe.', statsPatient=STABLE}

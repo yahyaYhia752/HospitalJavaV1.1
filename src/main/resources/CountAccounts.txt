@@ -1,3 +1,0 @@
-Person:0
-Paitent:0
-Doctor:0

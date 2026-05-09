@@ -7,47 +7,6 @@ import java.io.FileReader;
 public class DataManage  {
     private static String dataReaded;
     private static String path = "src/main/resources/data.txt";
-    private static String countingFile = "src/main/resources/CountAccounts.txt";
-    private static int countPerson;
-    private static int countPaitent;
-    private static int countDoctor;
-
-    public static int getCountPersonFromFile() throws Exception {
-        BufferedReader br = new BufferedReader(new FileReader(countingFile));
-        String personCount = br.readAllAsString().substring(br.readAllAsString().indexOf("Person:") + 1, br.readAllAsString().indexOf("\n"));
-        return Integer.parseInt(personCount);
-    }
-    public static void SaveCountPersonFromFile() throws Exception{
-        FileWriter fw = new FileWriter(countingFile);
-        BufferedReader br = new BufferedReader(new FileReader(countingFile));
-        String line =br.readAllLines().get(0).split(":")[0];
-        fw.write(line+":"+countPerson);
-        fw.close();
-    }
-    public static int getCountPaitentFromFile() throws Exception {
-        BufferedReader br = new BufferedReader(new FileReader(countingFile));
-        String personCount = br.readAllAsString().substring(br.readAllAsString().indexOf("Paitent:") + 1, br.readAllAsString().indexOf("\n"));
-        return Integer.parseInt(personCount);
-    }
-    public static void SaveCountPaitentFromFile() throws Exception{
-        FileWriter fw = new FileWriter(countingFile);
-        BufferedReader br = new BufferedReader(new FileReader(countingFile));
-        String line =br.readAllLines().get(1).split(":")[0];
-        fw.write(line+":"+countPaitent);
-        fw.close();
-    }
-    public static int getCountDoctorFromFile() throws Exception{
-        BufferedReader br = new BufferedReader(new FileReader(countingFile));
-        String personCount = br.readAllAsString().substring(br.readAllAsString().indexOf("Doctor:") + 1, br.readAllAsString().indexOf("\n"));
-        return Integer.parseInt(personCount);
-    }
-    public static void SaveCountDoctorFromFile() throws Exception{
-        FileWriter fw = new FileWriter(countingFile);
-        BufferedReader br = new BufferedReader(new FileReader(countingFile));
-        String line =br.readAllLines().get(2).split(":")[0];
-        fw.write(line+":"+countDoctor);
-        fw.close();
-    }
 
     public static String getDataReaded() {
         return dataReaded;
@@ -58,11 +17,15 @@ public class DataManage  {
     }
 
     public static void setFile() throws Exception {
-        FileWriter fw = new FileWriter(path); ;
+        FileWriter fw = new FileWriter(path);
         fw.write(dataReaded);
         fw.close();
     }
-
+    public static void addFile() throws Exception{
+        FileWriter fw = new FileWriter(path);
+        fw.append("\n"+dataReaded);
+        fw.close();
+    }
     // load file
     public static String getFile() throws Exception {
         BufferedReader br = new BufferedReader(new FileReader(path));
@@ -77,8 +40,10 @@ public class DataManage  {
     public static String findAccount(String nameAcc) throws Exception{
         String[] allAccounts = getFile().split("\n");
         for (int i=0;i<allAccounts.length;i++){
-            String Pname = allAccounts[i].substring(allAccounts[i].indexOf("name='") + 1, allAccounts[i].indexOf("'"));
-            if (Pname.equals(nameAcc)){
+            String properties = allAccounts[i].substring(allAccounts[i].indexOf("{") + 1, allAccounts[i].indexOf("}"));
+            int start = properties.indexOf("name='")+6;
+            String pName = properties.substring(start,properties.indexOf("'",start));
+            if (pName.equals(nameAcc)){
                 return allAccounts[i];
             }
         }
@@ -87,8 +52,11 @@ public class DataManage  {
     public static String checkPassword(String nameAcc,String password) throws Exception{
         String[] allAccounts = getFile().split("\n");
         for (int i=0;i<allAccounts.length;i++){
-            String pName = allAccounts[i].substring(allAccounts[i].indexOf("name='") + 1, allAccounts[i].indexOf("'"));
-            String pPassword = allAccounts[i].substring(allAccounts[i].indexOf("password='") + 1, allAccounts[i].indexOf("'"));
+            int startIndexPersonName,startIndexPersonPassword;
+            startIndexPersonName = allAccounts[i].indexOf("name='") + 6;
+            startIndexPersonPassword = allAccounts[i].indexOf("password='") + 10;
+            String pName = allAccounts[i].substring(startIndexPersonName, allAccounts[i].indexOf("'",startIndexPersonName));
+            String pPassword = allAccounts[i].substring(startIndexPersonPassword, allAccounts[i].indexOf("'",startIndexPersonPassword));
             if (pName.equals(nameAcc)||pPassword.equals(password)){
                 return allAccounts[i];
             }

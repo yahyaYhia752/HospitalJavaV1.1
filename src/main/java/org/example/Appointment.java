@@ -75,16 +75,22 @@ public class Appointment {
         String date = parts[1].split("=")[1].replace("'", "");
         String docName = parts[2].split("=")[1].replace("'", "");
         String paitName = parts[3].split("=")[1].replace("'", "");
+        Doctor doctor = null;
+        Patient patient = null;
         try {
             String dataDoc = DataManage.findAccount(docName);
             String dataPait = DataManage.findAccount(paitName);
-            Doctor doctor = Doctor.StringToDoctor(dataDoc);
-            Patient patient = Patient.StringToPatient(dataPait);
-            return new Appointment(idApp, date,doctor, patient);
+            IO.println("{"+dataPait+"}, {"+dataDoc+"}");
+            doctor = Doctor.StringToDoctor(dataDoc);
+            patient = Patient.StringToPatient(dataPait);
         }
         catch (Exception e){
             IO.println("Some Errors While find Appointment: "+e.getMessage());
         }
+        if ((doctor != null) || (patient != null)){
+            return new Appointment(idApp, date,doctor, patient);
+        }
+        else{return null;}
     }
     @Override
     public String toString() {
