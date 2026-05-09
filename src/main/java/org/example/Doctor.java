@@ -12,8 +12,8 @@ public class Doctor extends Person{
     private static int count;
 
     public Doctor(String name, int id, String password, int docId, String field, double salary) {
-        count +=1;
         super(name, id, password);
+        count +=1;
         this.docId = docId;
         this.field = field;
         this.salary = salary;
