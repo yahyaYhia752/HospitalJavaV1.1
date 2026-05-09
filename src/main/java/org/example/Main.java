@@ -6,7 +6,7 @@ public class Main {
             HospitalManager hospital = new HospitalManager();
             hospital.start();
         } catch (Exception e) {
-//            e.printStackTrace();
+            e.printStackTrace();
         }
 
     }

@@ -171,13 +171,12 @@ public class HospitalManager {
             kbd.nextLine();
             switch (choice) {
                 case 1: viewPatientAppointments(pat); break;
-//                case 2: bookAppointment(pat); break;
                 case 2: searchDoctor(); break;
                 case 3: viewBill(pat); break;
                 case 4: IO.println("Goodbye " + pat.getName()); break;
                 default: IO.println("there is no choice with this number");
             }
-        } while (choice != 5);
+        } while (choice != 4);
     }
 
     // Doctor methods
@@ -186,7 +185,7 @@ public class HospitalManager {
         int count=0;
         for (int i = 0; i < appointmentCount; i++) {
             if (appointments[i].getDoctor().getName().equals(doc.getName())) {
-                found[count] = appointments[i].getPatient().toString();
+                found[count] = appointments[i].getPatient().getName();
                 count++;
                 IO.println(count +". "+found[i]);
             }
